@@ -10,3 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
   relationMode = "prisma"
 }
+
+model Task {
+  id String @id @default(cuid())
+  type TasksEnum @default(NOT_IMPORTANT_NOT_URGENT)
+  description String
+  createdAt DateTime @default(now())
+  authorId String
+  @@index([authorId])
+}
+
+enum TasksEnum {
+  URGENT_IMPORTANT
+  NOT_URGENT_IMPORTANT
+  NOT_IMPORTANT_URGENT
+  NOT_IMPORTANT_NOT_URGENT
+}

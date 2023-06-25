@@ -1,15 +1,13 @@
-'use client'
+import { SignOutButton } from "@clerk/nextjs"
+import { prisma } from "./lib/prisma"
 
-import { SignOutButton, useUser } from "@clerk/nextjs"
+export default async function Home() {
+  const tasks = await prisma.task.findMany()
 
-export default function Home() {
-  const user = useUser();
-  console.log(user)
+  console.log(tasks)
 
   return (
     <div className="flex items-center justify-center">
-      {user.isLoaded && user.isSignedIn && <h1>Hello, {user.user?.firstName}</h1>}
-
       <SignOutButton />
     </div>
   )
