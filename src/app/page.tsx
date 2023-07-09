@@ -1,3 +1,10 @@
+import {
+  ImportantNotUrgent,
+  ImportantUrgent,
+  NotImportantNotUrgent,
+  NotImportantUrgent
+} from "./components";
+
 export default function Home() {
 
   return (
@@ -15,19 +22,16 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-2 gap-4 justify-between bg-purple-500 w-full h-[95%]">
           <div className="flex justify-center border-r-2 border-b-2">
-            {/* <UrgentImportant /> */}
+            <ImportantUrgent />
           </div>
           <div className="flex justify-center border-l-2 border-b-2">
-            {/* <NotUrgentImportant /> */}
-            <h1>Quadrant 2</h1>
+            <ImportantNotUrgent />
           </div>
           <div className="flex justify-center border-r-2 border-t-2">
-            {/* <UrgentNotImportant /> */}
-            <h1>Quadrant 3</h1>
+            <NotImportantUrgent />
           </div>
           <div className="flex justify-center border-l-2 border-t-2">
-            {/* <NotUrgentNotImportant /> */}
-            <h1>Quadrant 4</h1>
+            <NotImportantNotUrgent />
           </div>
         </div>
       </div>

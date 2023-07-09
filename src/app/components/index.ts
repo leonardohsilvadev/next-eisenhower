@@ -1,1 +1,5 @@
 export { default as Header } from "./Header/Header"
+export { default as ImportantNotUrgent } from "./ImportantNotUrgent/ImportantNotUrgent"
+export { default as ImportantUrgent } from "./ImportantUrgent/ImportantUrgent"
+export { default as NotImportantNotUrgent } from "./NotImportantNotUrgent/NotImportantNotUrgent"
+export { default as NotImportantUrgent } from "./NotImportantUrgent/NotImportantUrgent"
