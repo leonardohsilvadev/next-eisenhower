@@ -1,25 +1,6 @@
-import { Task } from "@prisma/client";
-import { cache, use } from "react";
-
-const getData = cache(() => 
-  fetch("http://localhost:3000/api/tasks/user_2RezOACDnGZ7S8a8kLbr4KQXBvo/URGENT_IMPORTANT").then((res) => res.json())
-)
+import { UrgentImportant } from "./components";
 
 export default function Home() {
-  let tasks = use<Task[]>(getData())
-  // const tasks = await prisma.task.findMany({
-  //   where: {
-  //     authorId: 'user_2RezOACDnGZ7S8a8kLbr4KQXBvo'
-  //   },
-  // });
-  // const response = await fetch("http://localhost:3000/api/tasks/user_2RezOACDnGZ7S8a8kLbr4KQXBvo")
-  // const tasks = await response.json()
-
-  // const tasks = cache(() =>
-  // fetch("http://localhost:3000/api/tasks/user_2RezOACDnGZ7S8a8kLbr4KQXBvo").then((res) => console.log(res.json()))
-  // );
-
-  console.log('data: ', tasks)
 
   return (
     <div className="flex flex-row bg-slate-600 h-[90%]">
@@ -36,8 +17,7 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-2 gap-4 justify-between bg-purple-500 w-full h-[95%]">
           <div className="flex justify-center border-r-2 border-b-2">
-            {/* UrgentImportant */}
-            <h1>Quadrant 1</h1>
+            <UrgentImportant />
           </div>
           <div className="flex justify-center border-l-2 border-b-2">
             {/* NotUrgentImportant */}
