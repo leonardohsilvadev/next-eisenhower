@@ -1,5 +1,6 @@
 import { ClerkProvider } from '@clerk/nextjs'
 import './globals.css'
+import { Header } from './components'
 
 export const metadata = {
   title: 'Next Eisenhower',
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="flex bg-[#F7FBFF] h-screen">
         <main className="w-full mx-auto overflow-y-auto">
+          <Header />
           {children}
         </main>
       </body>
