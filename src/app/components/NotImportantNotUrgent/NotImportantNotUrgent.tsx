@@ -2,14 +2,16 @@
 import useTasksData from '@/app/hooks/useTasksData'
 import { useUser } from '@clerk/nextjs'
 import { Task } from '@prisma/client'
+import { Input, TaskITem } from '..'
 
 export default function NotImportantNotUrgent() {
   const user = useUser()
   const [tasks] = useTasksData({ userId: user.user?.id, type: 'NOT_IMPORTANT_NOT_URGENT' })
 
   return (
-    <div>
-      {tasks && tasks.map((task: Task) => <h1 key={`task-${task.id}`}>{task.description}</h1>)}
+    <div className="bg-stone-600 w-full flex flex-col items-center px-24">
+      {tasks && tasks.map((task: Task) => <TaskITem key={`task-${task.id}`} task={task} />)}
+      <Input onAdd={() => {}} />
     </div>
   )
 }

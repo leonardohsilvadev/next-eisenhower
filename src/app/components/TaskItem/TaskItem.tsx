@@ -16,7 +16,7 @@ export default function TaskItem({ task }: TasksProps) {
         <Input onAdd={() => setIsEditing(false)} value={task.description} />
       ) : (
       <>
-        <h1 className="py-2 text-2xl text-white">{task.description}</h1>
+        <h1 className="py-2 text-lg font-semibold text-white">{task.description}</h1>
         <div className="flex flex-row justify-between w-[10%]">
           <PencilIcon width={24} height={24} className="text-yellow-500 cursor-pointer" onClick={() => setIsEditing(true)} />
           <TrashIcon width={24} height={24} className="text-red-600 cursor-pointer" />

@@ -8,7 +8,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 export default function Input({ onAdd, ...props }: InputProps) {
   return (
     <div className="w-full flex justify-between">
-      <input type="text" placeholder="Nome da tarefa" {...props} className="w-5/6 rounded-md p-2" />
+      <input type="text" placeholder="Nome da tarefa" {...props} className="w-5/6 rounded-md p-2 text-md" />
       <PlusCircleIcon width={48} height={48} className="text-yellow-500 cursor-pointer" onClick={onAdd} />
     </div>
   )
