@@ -1,21 +1,31 @@
 import { Task, TasksEnum } from "@prisma/client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type TasksDataProps = {
-  userId: string | undefined
+  authorId: string | undefined
   type: TasksEnum
 }
 
-const useTasksData = ({ userId, type }: TasksDataProps) => {
+const useTasksData = ({ authorId, type }: TasksDataProps) => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  useEffect(() => {
-    fetch(`${process.env.API_URL}/api/tasks/${userId}/${type}`)
-      .then((res) => res.json())
-      .then((data) => setTasks(data))
-  }, [userId, type]);
+  const getTasks = useCallback(() => {
+    fetch(`${process.env.API_URL}/api/tasks/${authorId}/${type}`)
+    .then((res) => res.json())
+    .then((data) => setTasks(data))
+  }, [authorId, type])
 
-  return [tasks];
+  const createTask = (body: any) => {
+    fetch(`${process.env.API_URL}/api/tasks`, { method: 'POST', body: JSON.stringify(body) })
+      .then((res) => res.json())
+      .then(() => getTasks())
+  }
+
+  useEffect(() => {
+    if (authorId) getTasks()
+  }, [authorId, type, getTasks]);
+
+  return { tasks, getTasks, createTask };
 };
 
 export default useTasksData;

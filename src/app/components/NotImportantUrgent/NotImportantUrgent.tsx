@@ -1,17 +1,28 @@
 'use client'
 import useTasksData from '@/app/hooks/useTasksData'
 import { useUser } from '@clerk/nextjs'
-import { Task } from '@prisma/client'
-import { Input, TaskITem } from '..'
+import { Task, TasksEnum } from '@prisma/client'
+import { Input, TaskItem } from '..'
 
 export default function NotImportantUrgent() {
+  const type: TasksEnum = "NOT_IMPORTANT_URGENT"
   const user = useUser()
-  const [tasks] = useTasksData({ userId: user.user?.id, type: 'NOT_IMPORTANT_URGENT' })
+  const { tasks, createTask } = useTasksData({ authorId: user.user?.id, type })
+
+  const handleAdd = () => {
+    const body = {
+      authorId: user.user?.id!,
+      description: 'Teste',
+      type
+    }
+
+    createTask(body)
+  }
 
   return (
     <div className="bg-stone-600 w-full flex flex-col items-center px-24">
-      {tasks && tasks.map((task: Task) => <TaskITem key={`task-${task.id}`} task={task} />)}
-      <Input onAdd={() => {}} />
+      {tasks && tasks.map((task: Task) => <TaskItem key={`task-${task.id}`} task={task} />)}
+      <Input onAdd={handleAdd} />
     </div>
   )
 }

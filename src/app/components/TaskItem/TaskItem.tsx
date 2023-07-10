@@ -10,10 +10,11 @@ type TasksProps = {
 
 export default function TaskItem({ task }: TasksProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false)
+
   return (
     <div className="w-full flex items-center justify-between border-b-2 border-dashed mb-8 py-3">
       {isEditing ? (
-        <Input onAdd={() => setIsEditing(false)} value={task.description} />
+        <Input onAdd={() => {}} value={task.description} />
       ) : (
       <>
         <h1 className="py-2 text-lg font-semibold text-white">{task.description}</h1>
