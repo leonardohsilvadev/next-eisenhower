@@ -16,16 +16,22 @@ const useTasksData = ({ authorId, type }: TasksDataProps) => {
   }, [authorId, type])
 
   const createTask = (body: any) => {
-    fetch(`${process.env.API_URL}/api/tasks`, { method: 'POST', body: JSON.stringify(body) })
+    fetch(`${process.env.API_URL}/api/task`, { method: 'POST', body: JSON.stringify(body) })
       .then((res) => res.json())
       .then(() => getTasks())
+  }
+
+  const deleteTask = (id: string) => {
+    fetch(`${process.env.API_URL}/api/task/${id}`, { method: 'DELETE' })
+    .then((res) => res.json())
+    .then(() => getTasks())
   }
 
   useEffect(() => {
     if (authorId) getTasks()
   }, [authorId, type, getTasks]);
 
-  return { tasks, getTasks, createTask };
+  return { tasks, getTasks, createTask, deleteTask };
 };
 
 export default useTasksData;

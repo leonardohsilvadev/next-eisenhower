@@ -6,9 +6,10 @@ import Input from "../Input/Input";
 
 type TasksProps = {
   task: Task
+  onDelete?: (id: string) => void
 }
 
-export default function TaskItem({ task }: TasksProps) {
+export default function TaskItem({ task, onDelete }: TasksProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false)
 
   return (
@@ -20,7 +21,7 @@ export default function TaskItem({ task }: TasksProps) {
         <h1 className="py-2 text-lg font-semibold text-white">{task.description}</h1>
         <div className="flex flex-row justify-between w-[10%]">
           <PencilIcon width={24} height={24} className="text-yellow-500 cursor-pointer" onClick={() => setIsEditing(true)} />
-          <TrashIcon width={24} height={24} className="text-red-600 cursor-pointer" />
+          <TrashIcon width={24} height={24} className="text-red-600 cursor-pointer" onClick={() => onDelete!(task.id)} />
         </div>
       </>
       )}
