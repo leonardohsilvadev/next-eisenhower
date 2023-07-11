@@ -27,11 +27,17 @@ const useTasksData = ({ authorId, type }: TasksDataProps) => {
     .then(() => getTasks())
   }
 
+  const updateTask = (body: any) => {
+    fetch(`${process.env.API_URL}/api/task`, { method: 'PUT', body: JSON.stringify(body) })
+    .then((res) => res.json())
+    .then(() => getTasks())
+  }
+
   useEffect(() => {
     if (authorId) getTasks()
   }, [authorId, type, getTasks]);
 
-  return { tasks, getTasks, createTask, deleteTask };
+  return { tasks, getTasks, createTask, deleteTask, updateTask };
 };
 
 export default useTasksData;

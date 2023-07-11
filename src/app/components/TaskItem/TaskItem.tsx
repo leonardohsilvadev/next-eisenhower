@@ -7,15 +7,21 @@ import Input from "../Input/Input";
 type TasksProps = {
   task: Task
   onDelete?: (id: string) => void
+  onEdit?: (task: Task) => void
 }
 
-export default function TaskItem({ task, onDelete }: TasksProps) {
+export default function TaskItem({ task, onDelete, onEdit }: TasksProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false)
+
+  const handleEdit = (value: string) => {
+    onEdit!({ ...task, description: value })
+    setIsEditing(false)
+  }
 
   return (
     <div className="w-full flex items-center justify-between border-b-2 border-dashed mb-8 py-3">
       {isEditing ? (
-        <Input onAdd={() => {}} value={task.description} />
+        <Input onAdd={handleEdit} defaultValue={task.description} />
       ) : (
       <>
         <h1 className="py-2 text-lg font-semibold text-white">{task.description}</h1>
