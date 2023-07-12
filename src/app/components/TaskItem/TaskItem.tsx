@@ -19,13 +19,13 @@ export default function TaskItem({ task, onDelete, onEdit }: TasksProps) {
   }
 
   return (
-    <div className="w-full flex items-center justify-between border-b-2 border-dashed mb-8 py-3">
+    <div className="w-full flex items-center justify-between border-b-2 border-dashed mb-4 pb-2">
       {isEditing ? (
         <Input onAdd={handleEdit} defaultValue={task.description} />
       ) : (
       <>
-        <h1 className="py-2 text-lg font-semibold text-white">{task.description}</h1>
-        <div className="flex flex-row justify-between w-[10%]">
+        <h1 className="py-1 text-md font-semibold text-white">{task.description}</h1>
+        <div className="flex flex-row justify-between items-center w-[10%]">
           <PencilIcon width={24} height={24} className="text-yellow-500 cursor-pointer" onClick={() => setIsEditing(true)} />
           <TrashIcon width={24} height={24} className="text-red-600 cursor-pointer" onClick={() => onDelete!(task.id)} />
         </div>

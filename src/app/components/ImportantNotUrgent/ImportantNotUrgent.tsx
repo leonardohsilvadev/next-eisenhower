@@ -2,12 +2,19 @@
 import useTasksData from '@/app/hooks/useTasksData'
 import { useUser } from '@clerk/nextjs'
 import { Task, TasksEnum } from '@prisma/client'
-import { Input, TaskItem } from '..'
+import { Input, QuadrantHeader, TaskItem } from '..'
 
 export default function ImportantNotUrgent() {
   const type: TasksEnum = "IMPORTANT_NOT_URGENT"
   const user = useUser()
-  const { tasks, createTask, deleteTask, updateTask } = useTasksData({ authorId: user.user?.id, type })
+  const {
+    tasks,
+    isLoading,
+    createTask,
+    deleteTasks,
+    deleteTask,
+    updateTask
+  } = useTasksData({ authorId: user.user?.id, type })
 
   const handleAdd = (inputValue: string) => {
     const body = {
@@ -33,6 +40,7 @@ export default function ImportantNotUrgent() {
 
   return (
     <div className="bg-stone-600 w-full flex flex-col items-center px-24">
+      <QuadrantHeader tasksCount={tasks.length} onDelete={deleteTasks} />
       {tasks && tasks.map((task: Task) => (
         <TaskItem
           key={`task-${task.id}`}
@@ -41,7 +49,7 @@ export default function ImportantNotUrgent() {
           onEdit={handleUpdate}
         />
       ))}
-      <Input onAdd={handleAdd} />
+      {tasks.length < 5 && <Input onAdd={handleAdd} isLoading={isLoading} />}
     </div>
   )
 }

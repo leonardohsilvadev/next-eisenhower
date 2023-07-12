@@ -1,17 +1,19 @@
 'use client'
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
-import React, { useRef } from "react";
+import React, { useState } from "react";
+import { Loader } from "..";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onAdd: (value: string) => void;
+  isLoading?: boolean;
 }
 
-export default function Input({ onAdd, ...props }: InputProps) {
-  const inputRef = useRef<HTMLInputElement>(null)
+export default function Input({ onAdd, isLoading, ...props }: InputProps) {
+  const [inputValue, setInputValue] = useState<string>('')
 
   const handleAdd = () => {
-    onAdd(inputRef.current!.value)
-    inputRef.current!.value = ''
+    onAdd(inputValue)
+    setInputValue('')
   }
 
   return (
@@ -19,11 +21,21 @@ export default function Input({ onAdd, ...props }: InputProps) {
       <input
         {...props}
         className="w-5/6 rounded-md p-2 text-md"
-        ref={inputRef}
+        value={inputValue}
+        onChange={({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => setInputValue(value)}
         type="text"
         placeholder="Nome da tarefa"
       />
-      <PlusCircleIcon width={48} height={48} className="text-yellow-500 cursor-pointer" onClick={handleAdd} />
+      {
+        inputValue !== '' && !isLoading &&
+          <PlusCircleIcon
+            width={36}
+            height={36}
+            className="text-yellow-500 cursor-pointer"
+            onClick={handleAdd}
+          />
+      }
+      {isLoading && <Loader />}
     </div>
   )
 }

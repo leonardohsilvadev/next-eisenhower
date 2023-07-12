@@ -5,3 +5,5 @@ export { default as NotImportantNotUrgent } from "./NotImportantNotUrgent/NotImp
 export { default as NotImportantUrgent } from "./NotImportantUrgent/NotImportantUrgent"
 export { default as Input } from "./Input/Input"
 export { default as TaskItem } from "./TaskItem/TaskItem"
+export { default as QuadrantHeader } from "./QuadrantHeader/QuadrantHeader"
+export { default as Loader } from "./Loader/Loader"
