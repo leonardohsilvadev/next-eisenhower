@@ -13,12 +13,14 @@ export default function QuadrantHeader({ tasksCount, onDelete }: QuadrantHeaderP
         >
           Desmarcar Todas
         </button> */}
-        <button
-          className="bg-gradient-to-tl from-red-500 to-red-800 text-white font-bold rounded-lg p-2 ml-2"
-          onClick={onDelete}
-        >
-          Limpar todas
-        </button>
+        {tasksCount > 1 && (
+          <button
+            className="bg-gradient-to-tl from-red-500 to-red-800 text-white font-bold rounded-lg p-2 ml-2"
+            onClick={onDelete}
+          >
+            Limpar todas
+          </button>
+        )}
       </div>
     </div>
   )

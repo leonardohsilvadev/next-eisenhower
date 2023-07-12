@@ -20,7 +20,7 @@ export default function Input({ onAdd, isLoading, ...props }: InputProps) {
     <div className="w-full flex justify-between">
       <input
         {...props}
-        className="w-5/6 rounded-md p-2 text-md"
+        className="w-[90%] rounded-md p-2 text-md"
         value={inputValue}
         onChange={({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => setInputValue(value)}
         type="text"
